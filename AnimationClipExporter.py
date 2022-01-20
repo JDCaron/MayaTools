@@ -1,6 +1,5 @@
 from PySide2 import QtGui, QtCore, QtWidgets
-from pymel.internal.factories import Always
-from shiboken2 import getAllValidWrappers, wrapInstance
+from shiboken2 import wrapInstance
 
 import maya.OpenMaya as om
 import maya.OpenMayaUI as omui
@@ -63,7 +62,7 @@ class AnimationExporter(QtWidgets.QDialog):
 
         self.setWindowTitle("Animation Exporter")
         self.setMinimumSize(minWidth, minHeight)
-        
+        self.setWindowFlags(self.windowFlags() ^ QtCore.Qt.WindowContextHelpButtonHint)
         self.setProperty("saveWindowPref", True)
 
         self.create_widgets()
@@ -280,7 +279,7 @@ class AnimationExporter(QtWidgets.QDialog):
         timeline = self.getTimelineMinMax()
 
         self.delClip_btn = QtWidgets.QPushButton()
-        self.delClip_btn.setIcon(QtGui.QIcon(":delete.png"))
+        self.delClip_btn.setIcon(QtGui.QIcon(":deleteClip.png"))
         self.clip_name_le = QtWidgets.QLineEdit()
         self.clip_name_le.setPlaceholderText("Enter Clip Name")
         self.start_frame_le = FloatEdit(str(timeline[0]), True, 35)
